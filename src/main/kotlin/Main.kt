@@ -17,13 +17,13 @@ fun computeConsecutivePartitions(number: Int): List<List<Int>> {
     val partitions: MutableList<List<Int>> = ArrayList()
 
     for (i in 1..number step 2) {
-        if (number % i == 0) partitions.add(computePartition(number = number, divisor = i))
+        if (number % i == 0) partitions.add(computeConsecutivePartition(number = number, divisor = i))
     }
 
     return partitions
 }
 
-fun computePartition(number: Int, divisor: Int): List<Int> {
+fun computeConsecutivePartition(number: Int, divisor: Int): List<Int> {
     val result: MutableList<Int> = ArrayList()
     val codivisor = number / divisor
 
