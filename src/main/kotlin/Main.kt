@@ -24,5 +24,14 @@ fun computeConsecutivePartitions(number: Int): List<List<Int>> {
 }
 
 fun computePartition(number: Int, divisor: Int): List<Int> {
-    return listOf(divisor)
+    val result: MutableList<Int> = ArrayList()
+    val codivisor = number / divisor
+
+    for (i in (codivisor - ((divisor - 1) / 2))..(codivisor + ((divisor - 1) / 2))) result.add(i)
+
+    if (result[0] <= 0) {
+        for (i in result[0]..result[0] * (-1)) result.remove(i)
+    }
+
+    return result
 }
