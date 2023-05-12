@@ -63,7 +63,7 @@ fun main(args: Array<String>) {
 
 fun computePartition(n: Int, a: Int, b: Int, matrix: Matrix, iter: Int, firstLine: Int) {
     // Set entries for all numbers from 1 to n , which are between a and b and call next iteration step
-    if (a < n) {
+    if (a <= n) {
         for (i in a..n) {
             matrix.setEntry(i - a + firstLine, iter, i)
 
@@ -91,7 +91,7 @@ fun computePartition(n: Int, a: Int, b: Int, matrix: Matrix, iter: Int, firstLin
     var posX: Int
     var posY: Int
     var temp: Int
-    val nextLine: Int
+    var nextLine: Int = 0
 
     if (steps < 0) {
         steps = 0
@@ -99,7 +99,7 @@ fun computePartition(n: Int, a: Int, b: Int, matrix: Matrix, iter: Int, firstLin
 
     val result: MutableMap<Int, Int> = HashMap()
 
-    for (i in n..(n - s + 1) step -1) {
+    for (i in n downTo (n - s + 1)) {
         result[i] = c - i
     }
 
