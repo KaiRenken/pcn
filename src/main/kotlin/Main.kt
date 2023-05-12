@@ -62,6 +62,7 @@ fun main(args: Array<String>) {
 }
 
 fun computePartition(n: Int, a: Int, b: Int, matrix: Matrix, iter: Int, firstLine: Int) {
+    // Set entries for all numbers from 1 to n , which are between a and b and call next iteration step
     if (a < n) {
         for (i in a..n) {
             matrix.setEntry(i - a + firstLine, iter, i)
@@ -82,6 +83,7 @@ fun computePartition(n: Int, a: Int, b: Int, matrix: Matrix, iter: Int, firstLin
         return
     }
 
+    // Define some variables needed for computation
     val s = b - a + 1
     val c = (2 * n) - (2 * s) + 1
     var m: Int
@@ -104,6 +106,7 @@ fun computePartition(n: Int, a: Int, b: Int, matrix: Matrix, iter: Int, firstLin
     var i = a
     m = c - i
 
+    // Find pairs for negative summing and swap second components
     while (m > 0) {
         posX = findPairsByStep(m, steps, n - s + 1, false)
         posY = findPairsByStep(m, steps, n - s + 1, true)
@@ -118,6 +121,7 @@ fun computePartition(n: Int, a: Int, b: Int, matrix: Matrix, iter: Int, firstLin
         m = c - i
     }
 
+    // Find pair for zero summing
     if (steps > 0) {
         posX = findFirstFreeSpace(steps, n - s + 1)
         matrix.setEntry(i - a + firstLine, iter, posX)
@@ -126,6 +130,7 @@ fun computePartition(n: Int, a: Int, b: Int, matrix: Matrix, iter: Int, firstLin
 
     posX = findSecondFreeSpace(steps, n - s + 1)
 
+    // Find pairs for non-zero summing
     if (steps == 0) {
         for (i in 0..(s - 1)) {
             matrix.setEntry(i + firstLine, iter, posX)
@@ -140,6 +145,7 @@ fun computePartition(n: Int, a: Int, b: Int, matrix: Matrix, iter: Int, firstLin
         }
     }
 
+    // Call next iteration step
     if (n - (2 * s) > 0) {
         for (i in firstLine..(s + firstLine)) {
             posX = matrix.getEntry(i, iter)
@@ -162,6 +168,7 @@ fun computePartition(n: Int, a: Int, b: Int, matrix: Matrix, iter: Int, firstLin
         } else {
             computePartition(n - (2 * s), a - c, b - c, matrix, iter + 2, nextLine)
         }
+        // Set remaining entries to zero
     } else {
         for (i in (iter + 2)..(matrix.columns - 1)) {
             matrix.setEntry(matrix.lines - 1, i, 0)
