@@ -151,7 +151,21 @@ fun computePartition(n: Int, a: Int, b: Int, matrix: Matrix, iter: Int, firstLin
             }
         }
 
+        for (i in firstLine..(nextLine - 1)) {
+            for (j in (iter + 2)..(matrix.columns - 1)) {
+                matrix.setEntry(i, j, 0)
+            }
+        }
 
+        if (c - a >= 0) {
+            computePartition(n - (2 * s), a + (2 * steps) + 1 - c, b - c, matrix, iter + 2, nextLine)
+        } else {
+            computePartition(n - (2 * s), a - c, b - c, matrix, iter + 2, nextLine)
+        }
+    } else {
+        for (i in (iter + 2)..(matrix.columns - 1)) {
+            matrix.setEntry(matrix.lines - 1, i, 0)
+        }
     }
 }
 
