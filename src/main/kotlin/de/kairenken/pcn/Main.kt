@@ -1,17 +1,19 @@
+package de.kairenken.pcn
+
 import kotlin.math.ceil
 import kotlin.math.floor
 
 fun main(args: Array<String>) {
     if (args.size == 1) {
         try {
-            val number = args[0].toInt()
+            val n = args[0].toInt()
 
-            if (number <= 0) {
+            if (n <= 0) {
                 println("Argument must be a positive integer!")
                 return
             }
 
-            println(computeConsecutivePartitions(number = number))
+            println(createConsecutivePartitions(n = n))
             return
         } catch (exception: NumberFormatException) {
             println("Argument must be a positive integer!")
@@ -36,7 +38,7 @@ fun main(args: Array<String>) {
             }
 
             if (sum((1..n).toList().toIntArray()) != sum((a..b).toList().toIntArray())) {
-                println("Sum from 1 to n must equal sum from a to b")
+                println("Sum from 1 to n must equal de.kairenken.pcn.sum from a to b")
                 return
             }
 
@@ -214,29 +216,6 @@ fun sum(summands: IntArray): Int {
 
     for (i in summands) {
         result += i
-    }
-
-    return result
-}
-
-fun computeConsecutivePartitions(number: Int): List<List<Int>> {
-    val partitions: MutableList<List<Int>> = ArrayList()
-
-    for (i in 1..number step 2) {
-        if (number % i == 0) partitions.add(computeConsecutivePartition(number = number, divisor = i))
-    }
-
-    return partitions
-}
-
-fun computeConsecutivePartition(number: Int, divisor: Int): List<Int> {
-    val result: MutableList<Int> = ArrayList()
-    val codivisor = number / divisor
-
-    for (i in (codivisor - ((divisor - 1) / 2))..(codivisor + ((divisor - 1) / 2))) result.add(i)
-
-    if (result[0] <= 0) {
-        for (i in result[0]..result[0] * (-1)) result.remove(i)
     }
 
     return result

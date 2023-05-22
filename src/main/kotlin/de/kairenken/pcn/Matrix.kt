@@ -1,3 +1,5 @@
+package de.kairenken.pcn
+
 class Matrix(
     val lines: Int,
     val columns: Int,
